@@ -19,7 +19,7 @@ public class DoorClosingState : StateObject
 
     public override void OnUpdate()
     {
-        float duration = Mathf.Max(0.0001f, _controller.OpenCloseDuration);
+        float duration = Mathf.Max(0.0001f, _controller.ClosingDuration);
         float t = Mathf.Clamp01(ElapsedTime / duration);
         float angle = Mathf.LerpAngle(_controller.OpenAngleY, _controller.ClosedAngleY, t);
         _controller.SetDoorAngleY(angle);

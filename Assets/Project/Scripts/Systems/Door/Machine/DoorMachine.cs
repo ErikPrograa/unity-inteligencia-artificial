@@ -45,7 +45,7 @@ public class DoorMachine : StateMachine
 
     private bool OpeningToOpen()
     {
-        return _opening.ElapsedTime >= _controller.OpenCloseDuration;
+        return _opening.ElapsedTime >= _controller.OpeningDuration;
     }
 
     private bool OpenToClosing()
@@ -56,6 +56,6 @@ public class DoorMachine : StateMachine
 
     private bool ClosingToClose()
     {
-        return _closing.ElapsedTime >= _controller.OpenCloseDuration;
+        return _closing.ElapsedTime >= _controller.ClosingDuration;
     }
 }

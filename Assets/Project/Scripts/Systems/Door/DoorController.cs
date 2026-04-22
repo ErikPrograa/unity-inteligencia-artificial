@@ -1,11 +1,14 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class DoorController : MonoBehaviour
 {
     [SerializeField] private Transform doorHinge;
     [SerializeField] private float closedAngleY;
     [SerializeField] private float openAngleY = 90f;
-    [SerializeField] private float openCloseDuration = 1f;
+    [FormerlySerializedAs("openCloseDuration")]
+    [SerializeField] private float openingDuration = 1f;
+    [SerializeField] private float closingDuration = 1f;
     [SerializeField] private float timeClosedBeforeOpen = 2f;
     [SerializeField] private float timeOpenBeforeClose = 2f;
 
@@ -17,7 +20,8 @@ public class DoorController : MonoBehaviour
     public Transform DoorHinge => doorHinge;
     public float ClosedAngleY => closedAngleY;
     public float OpenAngleY => openAngleY;
-    public float OpenCloseDuration => openCloseDuration;
+    public float OpeningDuration => openingDuration;
+    public float ClosingDuration => closingDuration;
     public float TimeClosedBeforeOpen => timeClosedBeforeOpen;
     public float TimeOpenBeforeClose => timeOpenBeforeClose;
 

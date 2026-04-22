@@ -691,7 +691,8 @@ MonoBehaviour:
   doorHinge: {fileID: 3949593471593959106}
   closedAngleY: 0
   openAngleY: 90
-  openCloseDuration: 1
+  openingDuration: 1
+  closingDuration: 1
   timeClosedBeforeOpen: 2
   timeOpenBeforeClose: 2
 --- !u!1 &2614402424324613714

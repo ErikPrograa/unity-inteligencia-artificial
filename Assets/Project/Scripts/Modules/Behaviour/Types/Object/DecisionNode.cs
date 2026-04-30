@@ -1,7 +1,7 @@
 ﻿
 using System;
 
-public class DecisionNode : BehaviourNode
+public class DecisionNode : IBehaviourNode
 {
     private Func<bool> _decision;
 
@@ -10,7 +10,7 @@ public class DecisionNode : BehaviourNode
         _decision = decision;
     }
 
-    public override BehaviourState Update()
+    public BehaviourState Execute()
     {
         return _decision() ? BehaviourState.Success : BehaviourState.Failure;
     }

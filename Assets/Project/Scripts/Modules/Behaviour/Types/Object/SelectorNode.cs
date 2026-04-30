@@ -1,20 +1,20 @@
 ﻿
 using System.Collections.Generic;
 
-public class SelectorNode : BehaviourNode
+public class SelectorNode : IBehaviourNode
 {
-    private List<BehaviourNode> _children;
+    private List<IBehaviourNode> _children;
 
-    public SelectorNode(List<BehaviourNode> children)
+    public SelectorNode(List<IBehaviourNode> children)
     {
         _children = children;
     }
 
-    public override BehaviourState Update()
+    public BehaviourState Execute()
     {
         foreach(var child in _children)
         {
-            BehaviourState state = child.Update();
+            BehaviourState state = child.Execute();
 
             if(state == BehaviourState.Success)
                 return BehaviourState.Success;

@@ -1,5 +1,5 @@
 ﻿
-public abstract class BehaviourNode
+public interface IBehaviourNode
 {
-    public abstract BehaviourState Update();
+    public BehaviourState Execute();
 }

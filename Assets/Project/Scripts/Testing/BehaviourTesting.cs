@@ -8,12 +8,12 @@ public class BehaviourTesting : MonoBehaviour
     [SerializeField] private bool optionAValue;
     [SerializeField] private bool optionBValue;
 
-    private BehaviourNode _root;
+    private IBehaviourNode _root;
 
     private void Awake()
     {
         _root = new SelectorNode(
-            new List<BehaviourNode>(new BehaviourNode[]
+            new List<IBehaviourNode>(new IBehaviourNode[]
             {
                 new DecisionNode(() => decisionValue),
                 new ActionNode(() =>
@@ -21,7 +21,7 @@ public class BehaviourTesting : MonoBehaviour
                     print("Realizando una acción");
                     return actionValue ? BehaviourState.Success : BehaviourState.Failure;
                 }),
-                new SequenceNode(new List<BehaviourNode>(new BehaviourNode[]
+                new SequenceNode(new List<IBehaviourNode>(new IBehaviourNode[]
                 {
                     new ActionNode(() =>
                     {
@@ -40,6 +40,6 @@ public class BehaviourTesting : MonoBehaviour
 
     private void Update()
     {
-        _root.Update();
+        _root.Execute();
     }
 }

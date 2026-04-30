@@ -1,20 +1,20 @@
 ﻿using System.Collections.Generic;
 
-public class SequenceNode : BehaviourNode
+public class SequenceNode : IBehaviourNode
 {
-    private List<BehaviourNode> _children;
+    private List<IBehaviourNode> _children;
     private int _current;
 
-    public SequenceNode(List<BehaviourNode> children)
+    public SequenceNode(List<IBehaviourNode> children)
     {
         _children = children;
     }
 
-    public override BehaviourState Update()
+    public BehaviourState Execute()
     {
         for(; _current<_children.Count; _current++)
         {
-            BehaviourState state = _children[_current].Update();
+            BehaviourState state = _children[_current].Execute();
 
             if(state == BehaviourState.Running)
                 return BehaviourState.Running;

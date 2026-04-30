@@ -1,6 +1,6 @@
 ﻿using System;
 
-public class ActionNode : BehaviourNode
+public class ActionNode : IBehaviourNode
 {
     private Func<BehaviourState> _action;
 
@@ -9,7 +9,7 @@ public class ActionNode : BehaviourNode
         _action = action;
     }
 
-    public override BehaviourState Update()
+    public BehaviourState Execute()
     {
         return _action();
     }

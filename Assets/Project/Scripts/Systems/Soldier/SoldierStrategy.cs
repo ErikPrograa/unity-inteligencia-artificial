@@ -7,6 +7,10 @@ public class SoldierStrategy : MonoBehaviour
     [SerializeField] private float playerOuterRadius;
     [SerializeField] private float playerInnerRadius;
 
+    [SerializeField] private Transform playerLookOrigin;
+    [SerializeField] private float safePointSearchRadius;
+    [SerializeField] private LayerMask safePointLayers;
+
     private void Update()
     {
         Vector3 position = GetApproximatePlayerPosition();
@@ -29,5 +33,41 @@ public class SoldierStrategy : MonoBehaviour
     public Vector3 GetRealPlayerPosition()
     {
         return playerTransform.position;
+    }
+
+    public bool GetNearestSafePoint(Vector3 origin, out Vector3 target)
+    {
+        Collider[] result = Physics.OverlapSphere(
+            origin, safePointSearchRadius, safePointLayers);
+        if(result == null || result.Length == 0)
+        {
+            target = Vector3.zero;
+            return false;
+        }
+
+        Vector3 closestPoint = Vector3.zero;
+        float closestDistance = int.MaxValue;
+
+        foreach(var collider in result)
+        {
+            float distance = Vector3.Distance(collider.transform.position, origin);
+            if(distance < closestDistance)
+            {
+                Vector3 playerToPoint = collider.transform.position 
+                    - playerLookOrigin.position;
+                Ray ray = new(playerLookOrigin.position, playerToPoint.normalized);
+                if(Physics.Raycast(ray, out var hit, float.MaxValue))
+                {
+                    if (((1 << hit.collider.gameObject.layer) & safePointLayers) != 0)
+                        continue;
+                }
+
+                closestDistance = distance;
+                closestPoint = collider.transform.position;
+            }
+        }
+
+        target = closestPoint;
+        return true;
     }
 }

@@ -10,6 +10,7 @@ public class SoldierController : MonoBehaviour
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private MonoBehaviour pointable;
     [SerializeField] private SoldierStrategy strategy;
+    [SerializeField] private MonoBehaviour health;
     [SerializeField] private Transform head;
 
     [Header("Setting")]
@@ -19,10 +20,12 @@ public class SoldierController : MonoBehaviour
     [SerializeField] private float lookingPersistence;
 
     private IBehaviourNode _rootBehaviour;
+    private IHealth _health;
 
     public NavMeshAgent Agent => agent;
     public IPointable Pointable { get; private set; }
     public SoldierStrategy Strategy => strategy;
+    public IHealth Health => _health;
     public Transform Head => head;
 
     public float EvadeDistance => evadeDistance;
@@ -34,6 +37,7 @@ public class SoldierController : MonoBehaviour
     {
         Pointable = pointable.GetComponent<IPointable>();
         _rootBehaviour = rootBehaviour.GetComponent<IBehaviourNode>();
+        _health = health.GetComponent<IHealth>();
     }
 
     private void Update()

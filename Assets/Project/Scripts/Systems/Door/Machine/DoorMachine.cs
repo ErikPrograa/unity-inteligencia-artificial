@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DoorMachine : StateMachine
+public class DoorMachine : BaseStateMachine
 {
     private readonly DoorController _controller;
     private readonly DoorOpenState _open;
@@ -8,7 +8,7 @@ public class DoorMachine : StateMachine
     private readonly DoorClosedState _close;
     private readonly DoorOpeningState _opening;
 
-    public DoorMachine(IGraph<StateObject, StateTransition> graph, DoorController controller) : base(graph)
+    public DoorMachine(IGraph<IState, StateTransition> graph, DoorController controller) : base(graph)
     {
         _controller = controller;
 
@@ -34,7 +34,7 @@ public class DoorMachine : StateMachine
         StateTransition closingToClose = new(_close, ClosingToClose);
         graph.AddEdge(_closing, closingToClose);
 
-        Initialize(_close);
+        SetState(_close);
     }
 
     private bool CloseToOpening()

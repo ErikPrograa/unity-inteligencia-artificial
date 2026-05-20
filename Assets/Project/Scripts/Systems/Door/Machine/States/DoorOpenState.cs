@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DoorOpenState : StateObject
+public class DoorOpenState : IState
 {
     private readonly DoorController _controller;
 
@@ -11,18 +11,18 @@ public class DoorOpenState : StateObject
         _controller = controller;
     }
 
-    public override void OnEnter()
+    public void OnEnter()
     {
         ElapsedTime = 0f;
         _controller.SetDoorAngleY(_controller.OpenAngleY);
     }
 
-    public override void OnUpdate()
+    public void OnUpdate(float deltaTime)
     {
-        ElapsedTime += Time.deltaTime;
+        ElapsedTime += deltaTime;
     }
 
-    public override void OnExit()
+    public void OnExit()
     {
     }
 }

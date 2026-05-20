@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DoorClosingState : StateObject
+public class DoorClosingState : IState
 {
     private readonly DoorController _controller;
 
@@ -11,22 +11,22 @@ public class DoorClosingState : StateObject
         _controller = controller;
     }
 
-    public override void OnEnter()
+    public void OnEnter()
     {
         ElapsedTime = 0f;
         _controller.ClearCloseRequest();
     }
 
-    public override void OnUpdate()
+    public void OnUpdate(float deltaTime)
     {
         float duration = Mathf.Max(0.0001f, _controller.ClosingDuration);
         float t = Mathf.Clamp01(ElapsedTime / duration);
         float angle = Mathf.LerpAngle(_controller.OpenAngleY, _controller.ClosedAngleY, t);
         _controller.SetDoorAngleY(angle);
-        ElapsedTime += Time.deltaTime;
+        ElapsedTime += deltaTime;
     }
 
-    public override void OnExit()
+    public void OnExit()
     {
         _controller.SetDoorAngleY(_controller.ClosedAngleY);
     }

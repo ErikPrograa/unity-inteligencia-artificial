@@ -27,13 +27,13 @@ public class DoorController : MonoBehaviour
 
     private void Awake()
     {
-        var graph = new UnorderedGraph<StateObject, StateTransition>();
+        var graph = new UnorderedGraph<IState, StateTransition>();
         _machine = new DoorMachine(graph, this);
     }
 
     private void Update()
     {
-        _machine.Update();
+        _machine.Update(Time.deltaTime);
     }
 
     public void RequestOpen()

@@ -10,6 +10,13 @@ public class SoldierReloadAction : ActionComponentNode
 
     protected override BehaviourState Action()
     {
+        if(_elapsedTime == 0)
+        {
+            soldier.SetAnimatorWalking(false);
+            soldier.SetAnimatorSpeed(1);
+            soldier.SetAnimatorReload();
+        }
+
         _elapsedTime += Time.deltaTime;
         if (_elapsedTime < soldier.ReloadDelay)
             return BehaviourState.Running;

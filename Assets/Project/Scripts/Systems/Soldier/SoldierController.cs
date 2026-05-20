@@ -13,6 +13,7 @@ public class SoldierController : MonoBehaviour
     [SerializeField] private MonoBehaviour health;
     [SerializeField] private Transform head;
     [SerializeField] private MonoBehaviour firearm;
+    [SerializeField] private Animator animator;
 
     [Header("Setting")]
     [SerializeField] private float evadeDistance;
@@ -30,6 +31,7 @@ public class SoldierController : MonoBehaviour
     public IHealth Health => _health;
     public Transform Head => head;
     public IFirearm Firearm { get; private set; }
+    public Animator Animator => animator;
 
     public float EvadeDistance => evadeDistance;
     public float LookingDistance => lookingDistance;
@@ -48,5 +50,36 @@ public class SoldierController : MonoBehaviour
     private void Update()
     {
         _rootBehaviour.Execute();
+    }
+
+    public void SetAnimatorWalking(bool state)
+    {
+        animator.SetBool("walking", state);
+    }
+
+    public void SetAnimatorDirection()
+    {
+        Vector3 v = agent.velocity;
+        v = agent.transform.worldToLocalMatrix.MultiplyVector(v);
+        v.Normalize();
+
+        animator.SetFloat("xDirection", v.x);
+        animator.SetFloat("yDirection", v.z);
+    }
+
+    public void SetAnimatorSpeed()
+    {
+        float speed = agent.velocity.magnitude / 2.5f;
+        animator.speed = speed;
+    }
+
+    public void SetAnimatorSpeed(float speed)
+    {
+        animator.speed = speed;
+    }
+
+    public void SetAnimatorReload()
+    {
+        animator.SetTrigger("reload");
     }
 }

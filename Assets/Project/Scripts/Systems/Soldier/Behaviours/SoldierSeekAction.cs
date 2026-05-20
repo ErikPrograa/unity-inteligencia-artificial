@@ -11,6 +11,10 @@ public class SoldierSeekAction : ActionComponentNode
 
     protected override BehaviourState Action()
     {
+        soldier.SetAnimatorWalking(true);
+        soldier.SetAnimatorDirection();
+        soldier.SetAnimatorSpeed();
+
         if (!_initialized)
         {
             Vector3 playerPosition = soldier.Strategy.GetApproximatePlayerPosition();

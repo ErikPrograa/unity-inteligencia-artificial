@@ -8,6 +8,10 @@ public class SoldierTargetAction : ActionComponentNode
 
     protected override BehaviourState Action()
     {
+        soldier.SetAnimatorWalking(true);
+        soldier.SetAnimatorDirection();
+        soldier.SetAnimatorSpeed();
+
         Vector3 playerPosition = soldier.Strategy.GetRealPlayerPosition();
         if (!NavMesh.SamplePosition(playerPosition, out var hit, int.MaxValue, NavMesh.AllAreas))
             return BehaviourState.Failure;

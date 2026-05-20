@@ -9,6 +9,10 @@ public class SoldierSafeAction : ActionComponentNode
 
     protected override BehaviourState Action()
     {
+        soldier.SetAnimatorWalking(true);
+        soldier.SetAnimatorDirection();
+        soldier.SetAnimatorSpeed();
+
         if (!soldier.Strategy.GetNearestSafePoint(
             soldier.transform.position, out var target))
             return BehaviourState.Failure;

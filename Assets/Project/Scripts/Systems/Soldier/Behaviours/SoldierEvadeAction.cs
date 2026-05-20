@@ -16,6 +16,10 @@ public class SoldierEvadeAction : ActionComponentNode
 
     protected override BehaviourState Action()
     {
+        soldier.SetAnimatorWalking(true);
+        soldier.SetAnimatorDirection();
+        soldier.SetAnimatorSpeed();
+
         if (!soldier.Pointable.IsBeeingPointed)
             return BehaviourState.Failure;
 

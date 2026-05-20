@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class TrafficLightGreenState : StateObject
+public class TrafficLightGreenState : IState
 {
     private TrafficLightController _controller;
 
@@ -12,18 +12,18 @@ public class TrafficLightGreenState : StateObject
         _controller = controller;
     }
 
-    public override void OnEnter()
+    public void OnEnter()
     {
         ElapsedTime = 0;
         _controller.GreenLightRenderer.material.color = Color.green;
     }
 
-    public override void OnUpdate()
+    public void OnUpdate(float deltaTime)
     {
-        ElapsedTime += Time.deltaTime;
+        ElapsedTime += deltaTime;
     }
 
-    public override void OnExit()
+    public void OnExit()
     {
         _controller.GreenLightRenderer.material.color = Color.black;
     }

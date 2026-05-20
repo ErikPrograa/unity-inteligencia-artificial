@@ -1,5 +1,5 @@
 
-public abstract class NpcState : StateObject
+public abstract class NpcState : IState
 {
     protected NpcController _controller;
 
@@ -7,4 +7,8 @@ public abstract class NpcState : StateObject
     {
         _controller = controller;
     }
+
+    public abstract void OnEnter();
+    public abstract void OnUpdate(float deltaTime);
+    public abstract void OnExit();
 }

@@ -1,14 +1,14 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class TrafficLightMachine : StateMachine
+public class TrafficLightMachine : BaseStateMachine
 {
     TrafficLightController _controller;
     TrafficLightRedState _red;
     TrafficLightYellowState _yellow;
     TrafficLightGreenState _green;
 
-    public TrafficLightMachine(IGraph<StateObject, StateTransition> graph,
+    public TrafficLightMachine(IGraph<IState, StateTransition> graph,
         TrafficLightController controller) : base(graph)
     {
         _controller = controller;
@@ -30,7 +30,7 @@ public class TrafficLightMachine : StateMachine
         StateTransition yellowToRed = new(_red, YellowToRed);
         graph.AddEdge(_yellow, yellowToRed);
 
-        Initialize(_green);
+        SetState(_green);
     }
 
     private bool RedToGreen()
